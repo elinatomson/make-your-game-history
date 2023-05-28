@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="./static/styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <title>Tetris Scoreboard</title>
+</head> 
+<body class="body">
+    <p>
+        <h1 class="center">Scoreboard</h1>
+    </p> 
+    <p>
+        <h3 class="center" id="sentence"></h3>
+    </p>     
+    <p>
+        <table id="score-table" class="table">
+        <thead class="heads">
+            <tr>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Score</th>
+            <th>Time</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Table rows will be dynamically generated here by scoreboard.js -->
+        </tbody>
+        </table>
+    </p>
+    <p class="center">
+        <button class="button" id="prevButton">Previous</button> 
+        <button class="button" id="nextButton">Next</button> 
+    </p>
+    <p class="center">
+        <input class="button" type="button" value="Play again" onclick="window.location = '/'">
+    </p> 
+    <script src="./static/scoreboard.js"></script>
+</body>
+</html>
