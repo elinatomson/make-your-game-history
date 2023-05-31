@@ -152,17 +152,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let speed = 1000; 
         let levelMessage = ""; 
         //adjusting the speed based on the player's score
-        if (score >= 30) {
+        if (score >= 20) {
             speed = 500; 
             levelMessage = "You've reached level 2.";
             level.innerHTML = 2;
         }
-        if (score >= 60) {
+        if (score >= 40) {
             speed = 250;
             levelMessage = "You've reached level 3.";
             level.innerHTML = 3;
         }
-        if (score >= 90) {
+        if (score >= 60) {
             speed = 150; 
             levelMessage = "You've reached level 4.";
             level.innerHTML = 4;
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cancelAnimationFrame(animationId);
             isGameOver = true;
             enterPlayerName("Unfortunately the economy crashed faster than you were able to build! But still enter your name to get to the scoreboard:")
-        } else if (score >= 120) {
+        } else if (score >= 80) {
             music.pause();
             music4.play()
             clearInterval(timerInterval);
