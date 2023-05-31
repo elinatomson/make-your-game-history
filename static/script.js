@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     //the number of squares in each row and the number of rows in the grid
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     music3.volume = 0.1
     let music4 = new Audio()
     music4.src = 'static/winning.wav'
-    music4.volume = 0.1
+    music4.volume = 0.3
     musicBtn.addEventListener('click', () => {
         if (musicOff) {
             music.play()
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         [width,width+1,width+2,width+3]
     ]
     const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
-    //colors of the terominos
     const colors = ['#a8a3cf', '#ca9dd7', '#d3f5f8', '#b1e8ed', '#fd94b4', '#714288', 'white']
     let currentPosition = 4 //the upper left square of the teromino
     let currentRotation = 0 //the first position of the teromino
@@ -111,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function draw() {
         current.forEach(index => {
-            //classList.Add with the class named tetromino. Coloring each square of the current tetromino with the color which is named in css file
             squares[currentPosition + index].classList.add('tetromino')
             squares[currentPosition + index].style.backgroundColor = colors[random]
         })
@@ -119,12 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function unDraw() {
         current.forEach(index => {
-            //removing class and removing color
             squares[currentPosition + index].classList.remove('tetromino')
             squares[currentPosition + index].style.backgroundColor = ''
         })
     }
 
+    //arrows from keyboard to play with
     function control (event) {
         //if game is paused, don't allow arrow keys to move the tetromino
         if (isPaused) {
@@ -146,12 +143,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', control);
 
     function gameLoop() {
-        if (isPaused) return; // Check if game is paused, exit loop if true
+        //check if game is paused, exit loop if true
+        if (isPaused) return; 
 
         animationId = requestAnimationFrame(gameLoop);
         const currentTime = new Date().getTime();
         const elapsedTime = currentTime - playedTime;
-        let speed = 1000; // Default speed
+        let speed = 1000; 
         let levelMessage = ""; 
         //adjusting the speed based on the player's score
         if (score >= 30) {
@@ -188,13 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveDown() {
         if (isGameOver) return
         unDraw() 
-        currentPosition += width // change the position
+        currentPosition += width //change the position one down
         draw() 
-        freeze() //checking every second if the tetromino has to be freezed 
+        freeze() //checking if the tetromino has to be freezed 
     }
 
     function freeze() {
-        //checking if some (not each) of the items in our array is true. if we are getting at least one true. Some of the squares of the current tetromino contains classname taken.
+        //checking if some (not each) of the items in our array is true. Some of the squares of the current tetromino contains classname taken.
         if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
             //changing each square of the tetromino to classname taken
             current.forEach(index => squares[currentPosition + index].classList.add('taken'))
@@ -213,11 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveLeft() {
         if (isGameOver) return
         unDraw() 
-        //looks at the each item of the tetromino array and checks if the statement is true at least of some of the tetromino items
         //if one of the indexes is in the gridsquare of 10 and you are dividing it with 10 (width) then it is on the left side. It goes also with 20, 30, 40 and so on.
         const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
         if(!isAtLeftEdge) {
-            currentPosition -= 1 //if it is not on the left, then we allow it to move to the left, meaning -1 is moving it to left
+            //if it is not on the left, then we allow it to move to the left, meaning -1 is moving it to left
+            currentPosition -= 1 
         }
         if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
             currentPosition += 1 
@@ -239,29 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
         draw()
     }
 
-    function isAtRight() {
-        return current.some(index=> (currentPosition + index + 1) % width === 0)  
-    }
-      
-    function isAtLeft() {
-        return current.some(index=> (currentPosition + index) % width === 0)
-    }
-
-    function checkRotatedPosition(P){
-        P = P || currentPosition       //get current position.  Then, check if the piece is near the left side.
-        if ((P+1) % width < 4) {         //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
-            if (isAtRight()){            //use actual position to check if it's flipped over to right side
-                currentPosition += 1    //if so, add one to wrap it back around
-                checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
-                }
-        } else if (P % width > 5) {
-            if (isAtLeft()){
-                currentPosition -= 1
-                checkRotatedPosition(P)
-            }
-        }
-    }
-
     function rotate() {
         if (isGameOver) return
         unDraw()
@@ -272,6 +247,29 @@ document.addEventListener('DOMContentLoaded', () => {
         current = theTetrominoes[random][currentRotation]
         checkRotatedPosition()
         draw()
+    }
+
+    function checkRotatedPosition(P){
+        P = P || currentPosition       
+        if ((P+1) % width < 4) {        
+            if (isAtRight()){            
+                currentPosition += 1    
+                checkRotatedPosition(P) 
+                }
+        } else if (P % width > 5) {
+            if (isAtLeft()){
+                currentPosition -= 1
+                checkRotatedPosition(P)
+            }
+        }
+    }
+
+    function isAtRight() {
+        return current.some(index=> (currentPosition + index + 1) % width === 0)  
+    }
+      
+    function isAtLeft() {
+        return current.some(index=> (currentPosition + index) % width === 0)
     }
 
     //show up-next tetromino in mini-grid display
@@ -302,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
 
     function displayShape() {
-    //remove any trace of a tetromino form the entire mini-grid
+    //remove any trace of a tetromino from the entire mini-grid
     displaySquares.forEach(square => {
         square.classList.remove('tetromino')
         square.style.backgroundColor = ''
@@ -317,19 +315,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isGameOver) return;
         isPaused = !isPaused
         if (isPaused) {
-            // Game paused
+            //game paused
             pauseBtn.innerHTML = "Resume";
             clearInterval(timerInterval);
             cancelAnimationFrame(animationId);
             music.pause();
-            pausedTime = new Date().getTime(); // Store the timestamp when the game was paused
+            //Store the timestamp when the game was paused
+            pausedTime = new Date().getTime(); 
         }else {
-            // Game resumed
+            //game resumed
             pauseBtn.innerHTML = "Pause";
             const currentTime = new Date().getTime();
-            playedTime += currentTime - pausedTime; // Update playedTime by adding the duration of pause
+            //update playedTime by adding the duration of pause
+            playedTime += currentTime - pausedTime;
             gameLoop();
-            countTimer(); // Resume the timer
+            //resume the timer
+            countTimer(); 
             if (!musicOff) {
                 music.play()
                 musicOff = false
@@ -342,16 +343,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
     function startOrResetGame() {
         if (isPlaying) {
-            // Reset the game
+            //reset the game
             clearInterval(timerInterval);
             cancelAnimationFrame(animationId);
             location.reload()
         } else {
-            // Start a new game
+            //start a new game
             isPlaying = true;
             startBtn.innerHTML = 'Reset';
             playedTime = new Date().getTime();
-            countTimer(); // Call countTimer function to start the timer
+            countTimer(); 
             nextRandom = Math.floor(Math.random() * theTetrominoes.length);
             displayShape();
             music.play();
@@ -404,8 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let data
+    let playerName
     function enterPlayerName(promptMessage) {
-        const playerName = prompt(promptMessage)
+        playerName = prompt(promptMessage)
         data = {
         name: playerName,
         score: score, 
@@ -413,20 +415,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //game over with two possible ways- id player fails to complete the game or if player completed the game
     function gameOver() {
         if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+            music.pause();
+            music2.play()
             clearInterval(timerInterval);
             cancelAnimationFrame(animationId);
-            music.pause();
             isGameOver = true;
-            music2.play()
             enterPlayerName("Unfortunately the economy crashed faster than you were able to build! But still enter your name to get to the scoreboard:")
         } else if (score >= 120) {
+            music.pause();
+            music4.play()
             clearInterval(timerInterval);
             cancelAnimationFrame(animationId);
-            music.pause();
             isGameOver = true;
-            music4.play()
             enterPlayerName("Congratulations! You were fast enough! Enter your name to get to the scoreboard:")
         }
             
@@ -439,8 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(response => {
             if (response.ok) {
-                // Redirect to the desired page after sending player data
-                window.location.href = 'http://localhost:8080/scoreboard';
+                window.location.href = 'http://localhost:8080/scoreboard?name='+ playerName;
             } else {
                 console.error('Error sending player data');
             }

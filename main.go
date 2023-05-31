@@ -71,7 +71,7 @@ func getAllGameData(w http.ResponseWriter, r *http.Request) {
 	})
 	for i := 0; i < len(gameData); i++ {
 		gameData[i].Rank = i + 1
-		gameData[i].PositionPercent = float64(i) / float64(len(gameData)) * 100
+		gameData[i].PositionPercent = float64(i+1) / float64(len(gameData)) * 100
 	}
 	//encoding the gameData into JSON and writes it to the http.ResponseWriter
 	json.NewEncoder(w).Encode(gameData)
