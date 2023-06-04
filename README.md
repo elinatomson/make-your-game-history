@@ -12,7 +12,13 @@ Also after the game you can insert your name to see your position in the scorebo
 * Play the game
 * To stop the server, click Ctrl + C in your terminal
 
-Folder <code>static</code> contains the JavaScript codes, css file and music effects for the game.
+## Audit questions
+
+https://github.com/01-edu/public/blob/master/subjects/make-your-game/history/audit.md 
+
+## Code Architecture
+
+Folder <code>static</code> contains the JavaScript codes, HTML files, css file and music effects for the game.
 
 The script.js code sets up the game grid, handles user input, controls the movement and rotation of tetrominoes, and manages game logic such as scoring, line clearing, levels, and game over detection, and handles start, pause, resume and reset buttons. Scoreboard.js code is to organize all the data (player name, rank, score, time and position prercentile) on a scoreboard. 
 
