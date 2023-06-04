@@ -468,12 +468,12 @@ document.addEventListener('DOMContentLoaded', () => {
             stop()
             music2.play()
             showGameOverText('Game Over!')
-            enterPlayerName('Unfortunately, the economy crashed before you could finish all the levels! However, please enter your name to get to the scoreboard:')
+            enterPlayerName('Unfortunately, the economy crashed before you could finish all the levels, have a happy povo life! Enter your name for the scoreboard:')
         } else if (score >= 80) {
             stop()
             music4.play()
             showGameOverText('Well Done!')
-            enterPlayerName('Congratulations! You were quick enough! Please enter your name to get to the scoreboard:')
+            enterPlayerName('Congratulations! You were quick enough! You built enough to feel secure in this economy. Enter your name for the scoreboard:')
         }
     }
             
