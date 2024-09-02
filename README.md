@@ -1,20 +1,26 @@
 # Tetris Game
 
+This project has been made according to the task and its sub-tasks described [here](https://github.com/01-edu/public/tree/master/subjects/make-your-game).
+
 This is a JavaScript implementation of the classic game Tetris. It uses HTML, CSS, JavaScript and Go to create a grid-based game interface and allows players to control falling tetrominoes to clear rows and score points.
 To win the game you have to complete 4 levels. At each level the speed of tetrominoes goes little bit faster. 
 Also after the game you can insert your name to see your position in the scoreboard. 
 
-## Usage
+## How to use
 
-* Type in your terminal: go run main.go
-* In the Windows Security alert cklick "Allow access"
-* Open http://localhost:8080
-* Play the game
-* To stop the server, click Ctrl + C in your terminal
+* Option one with Docker
+    - You should have Docker installed. If you don't have, install [Docker](https://docs.docker.com/get-started/get-docker/)
+    - To build the image and run the container use following commands:
+        - for building the docker image: docker build -t dockerize .
+        - for running the docker container: docker run -it -p 8080:8080 dockerize
+    - To check the app, open http://localhost:8080 in a browser. 
+    - To terminate the server click CTRL + "C".
 
-## Audit questions
-
-https://github.com/01-edu/public/blob/master/subjects/make-your-game/history/audit.md 
+* Option two directly from your terminal
+    - You should have Go installed. If you don't have, install [Go](https://go.dev/doc/install)
+    - Type in your terminal: go run main.go
+    - Open http://localhost:8080
+    - To stop the server, click Ctrl + C in your terminal
 
 ## Code Architecture
 
@@ -26,4 +32,3 @@ And the purpose of main.go file is to create a web server for a Tetris game. It 
 
 ## Authors
 - [@elinat](https://01.kood.tech/git/elinat)
-- [@Anni.M](https://01.kood.tech/git/Anni.M)
